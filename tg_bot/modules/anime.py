@@ -521,7 +521,7 @@ dispatcher.add_handler(CHARACTER_HANDLER)
 dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(USER_HANDLER)
 dispatcher.add_handler(HINDISUB_SEARCH_HANDLER)
-dispatcher.add_handler(tpx_SEARCH_HANDLER)
+dispatcher.add_handler(TPX_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
 __mod_name__ = "MyAnimeList"
