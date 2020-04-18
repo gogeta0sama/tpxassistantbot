@@ -8,7 +8,7 @@ import requests
 from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 from telegram.ext import CallbackQueryHandler, run_async
 
-from tg_bot import dispatcher, OWNER_ID, SUDO_USERS,
+from tg_bot import dispatcher, OWNER_ID, SUDO_USERS
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 info_btn = "More Information"
