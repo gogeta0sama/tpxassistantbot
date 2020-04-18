@@ -156,7 +156,7 @@ def get_anime_manga(mal_id, search_type, user_id):
 
     if search_type == "anime_anime":
         kaizoku = f"https://animekaizoku.com/?s={result['title']}"
-        kayo = f"https://animekayo.com/?s={result['title']}"
+        HindiSub = f"https://hindisub.com/?s={result['title']}"
 
         buttons.append(
             [InlineKeyboardButton(kaizoku_btn, url=kaizoku), InlineKeyboardButton(kayo_btn, url=kayo)]
@@ -452,8 +452,8 @@ def site_search(bot: Bot, update: Update, site: str):
             more_results = False
             result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
 
-    elif site == "kayo":
-        search_url = f"https://animekayo.com/?s={search_query}"
+    elif site == "HindiSub":
+        search_url = f"https://hindisub.com/?s={search_query}"
         html_text = requests.get(search_url).text
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h2", {'class': "title"})
@@ -488,7 +488,7 @@ def kaizoku(bot: Bot, update: Update):
 
 @run_async
 def kayo(bot: Bot, update: Update):
-    site_search(bot, update, "kayo")
+    site_search(bot, update, "hindisub")
 
 
 __help__ = """
@@ -502,7 +502,7 @@ Get information about anime, manga or characters from [MyAnimeList](https://myan
  - /user <user>: returns information about a MyAnimeList user.
  - /upcoming: returns a list of new anime in the upcoming seasons.
  - /kaizoku <anime>: search an anime on animekaizoku.com
- - /kayo <anime>: search an anime on animekayo.com
+ - /tpx <anime>: search an anime on hindisub.com
 
  """
 
@@ -512,7 +512,7 @@ MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
 USER_HANDLER = DisableAbleCommandHandler("user", user)
 UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
 KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
-KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
+TPX_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
 BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*')
 
 dispatcher.add_handler(BUTTON_HANDLER)
@@ -521,10 +521,10 @@ dispatcher.add_handler(CHARACTER_HANDLER)
 dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(USER_HANDLER)
 dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
-dispatcher.add_handler(KAYO_SEARCH_HANDLER)
+dispatcher.add_handler(TPX_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
 __mod_name__ = "MyAnimeList"
-__command_list__ = ["anime", "manga", "character", "user", "upcoming", "kaizoku", "kayo"]
+__command_list__ = ["anime", "manga", "character", "user", "upcoming", "kaizoku", "tpx"]
 __handlers__ = [ANIME_HANDLER, CHARACTER_HANDLER, MANGA_HANDLER, USER_HANDLER, UPCOMING_HANDLER, KAIZOKU_SEARCH_HANDLER,
-                KAYO_SEARCH_HANDLER, BUTTON_HANDLER]
+                TPX_SEARCH_HANDLER, BUTTON_HANDLER]
