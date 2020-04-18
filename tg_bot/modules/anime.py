@@ -159,7 +159,7 @@ def get_anime_manga(mal_id, search_type, user_id):
         tpx = f"https://hindisub.com/?s={result['title']}"
 
         buttons.append(
-            [InlineKeyboardButton(kaizoku_btn, url=kaizoku), InlineKeyboardButton(kayo_btn, url=kayo)]
+            [InlineKeyboardButton(hindisub_btn, url=hindisub), InlineKeyboardButton(tpx_btn, url=tpx)]
         )
     elif search_type == "anime_manga":
         buttons.append(
