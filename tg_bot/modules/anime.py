@@ -520,7 +520,7 @@ dispatcher.add_handler(ANIME_HANDLER)
 dispatcher.add_handler(CHARACTER_HANDLER)
 dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(USER_HANDLER)
-dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
+dispatcher.add_handler(HINDISUB_SEARCH_HANDLER)
 dispatcher.add_handler(tpx_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
