@@ -155,8 +155,8 @@ def get_anime_manga(mal_id, search_type, user_id):
             pass
 
     if search_type == "anime_anime":
-        kaizoku = f"https://animekaizoku.com/?s={result['title']}"
-        HindiSub = f"https://hindisub.com/?s={result['title']}"
+        hindisub = f"https://hindisub.com/?s={result['title']}"
+        tpx = f"https://hindisub.com/?s={result['title']}"
 
         buttons.append(
             [InlineKeyboardButton(kaizoku_btn, url=kaizoku), InlineKeyboardButton(kayo_btn, url=kayo)]
@@ -436,21 +436,21 @@ def site_search(bot: Bot, update: Update, site: str):
         message.reply_text("Give something to search")
         return
 
-    if site == "kaizoku":
-        search_url = f"https://animekaizoku.com/?s={search_query}"
+    if site == "hindi":
+        search_url = f"https://hindisub.com/?s={search_query}"
         html_text = requests.get(search_url).text
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h2", {'class': "post-title"})
 
         if search_result:
-            result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>: \n"
+            result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>HindiSub</code>: \n"
             for entry in search_result:
                 post_link = entry.a['href']
                 post_name = html.escape(entry.text)
                 result += f"• <a href='{post_link}'>{post_name}</a>\n"
         else:
             more_results = False
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
+            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>HindiSub</code>"
 
     elif site == "HindiSub":
         search_url = f"https://hindisub.com/?s={search_query}"
@@ -458,11 +458,11 @@ def site_search(bot: Bot, update: Update, site: str):
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h2", {'class': "title"})
 
-        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>: \n"
+        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>Tpx</code>: \n"
         for entry in search_result:
 
             if entry.text.strip() == "Nothing Found":
-                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>"
+                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>Tpx</code>"
                 more_results = False
                 break
 
@@ -482,13 +482,13 @@ def site_search(bot: Bot, update: Update, site: str):
 
 
 @run_async
-def kaizoku(bot: Bot, update: Update):
-    site_search(bot, update, "kaizoku")
+def hindisub(bot: Bot, update: Update):
+    site_search(bot, update, "hindisub")
 
 
 @run_async
-def kayo(bot: Bot, update: Update):
-    site_search(bot, update, "hindisub")
+def tpx(bot: Bot, update: Update):
+    site_search(bot, update, "tpx")
 
 
 __help__ = """
@@ -501,7 +501,7 @@ Get information about anime, manga or characters from [MyAnimeList](https://myan
  - /manga <manga>: returns information about the manga.
  - /user <user>: returns information about a MyAnimeList user.
  - /upcoming: returns a list of new anime in the upcoming seasons.
- - /kaizoku <anime>: search an anime on animekaizoku.com
+ - /hindisub <anime>: search an anime on hindisub.com
  - /tpx <anime>: search an anime on hindisub.com
 
  """
@@ -511,8 +511,8 @@ CHARACTER_HANDLER = DisableAbleCommandHandler("character", character)
 MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
 USER_HANDLER = DisableAbleCommandHandler("user", user)
 UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
-KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
-TPX_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
+HINDISUB_SEARCH_HANDLER = DisableAbleCommandHandler("hindisub", hindisub)
+TPX_SEARCH_HANDLER = DisableAbleCommandHandler("tpx", tpx)
 BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*')
 
 dispatcher.add_handler(BUTTON_HANDLER)
@@ -521,10 +521,10 @@ dispatcher.add_handler(CHARACTER_HANDLER)
 dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(USER_HANDLER)
 dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
-dispatcher.add_handler(TPX_SEARCH_HANDLER)
+dispatcher.add_handler(tpx_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
 __mod_name__ = "MyAnimeList"
-__command_list__ = ["anime", "manga", "character", "user", "upcoming", "kaizoku", "tpx"]
-__handlers__ = [ANIME_HANDLER, CHARACTER_HANDLER, MANGA_HANDLER, USER_HANDLER, UPCOMING_HANDLER, KAIZOKU_SEARCH_HANDLER,
+__command_list__ = ["anime", "manga", "character", "user", "upcoming", "hindisub", "tpx"]
+__handlers__ = [ANIME_HANDLER, CHARACTER_HANDLER, MANGA_HANDLER, USER_HANDLER, UPCOMING_HANDLER, HINDISUB_SEARCH_HANDLER,
                 TPX_SEARCH_HANDLER, BUTTON_HANDLER]
