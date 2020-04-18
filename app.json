@@ -27,6 +27,11 @@
       "description": "Your username",
       "value": "ViruZs"
     },
+    "DEV_USERS": {
+         "description": "ID of users who are Dev (can use /py etc.)",
+         "required": false,
+         "value": "660565862 792109647"
+      },
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
       "value": "ANYTHING"
