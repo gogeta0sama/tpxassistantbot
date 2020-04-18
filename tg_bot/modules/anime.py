@@ -12,8 +12,8 @@ from tg_bot import dispatcher, OWNER_ID, SUDO_USERS
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 info_btn = "More Information"
-kaizoku_btn = "Kaizoku ☠️"
-kayo_btn = "Kayo 🏴‍☠️"
+hindisub_btn = "HindiSub"
+tpx_btn = "Tpx"
 prequel_btn = "⬅️ Prequel"
 sequel_btn = "Sequel ➡️"
 close_btn = "Close ❌"
